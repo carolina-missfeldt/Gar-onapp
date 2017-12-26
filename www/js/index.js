@@ -27,10 +27,10 @@ $(document).ready(function () {
             var produto = this.firstChild.textContent;
             var quantidade = this.lastChild.textContent;
 
-            texto += produto + ': ' + quantidade + ',';
+            texto += produto + ': ' + quantidade + ',<br>';
         });
 
-        $('#resumo').text(texto);
+        $('#resumo').html(`${texto}`);
     });
 
     $('#confirmacao').modal();
