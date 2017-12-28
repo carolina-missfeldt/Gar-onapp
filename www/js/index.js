@@ -12,7 +12,7 @@ $(document).ready(function () {
     $('.collection-item').on('click', function () {
 
         var $badge = $('.badge', this);
-        if ($badge.length == 0) {
+        if ($badge.length <= 0) {
             $badge = $('<span class="badge brown-text">0</span>')
                 .appendTo(this);
         }
@@ -42,4 +42,27 @@ $(document).ready(function () {
         $('#numero-mesa').val('');
         $('.badge').remove();
     });
+
+    $('.acao-finalizar').click(function(){
+        $.ajax({
+            url: 'http://cozinhapp.sergiolopes.org/novo-pedido',
+            data: {
+                mesa: $('#numero-mesa').val(),
+                pedido: $('#resumo').text()
+            },
+            
+            success: function(resposta) {
+                Materialize.toast(resposta, 2000);
+            
+                $('#numero-mesa').val('');
+                $('.badge').remove();
+            },
+            error: function(erro) {
+                Materialize.toast(erro.responseText, 3000, `red-text`);
+            }
+            
+        })
+        console.log(data);
+    });
+
 });
